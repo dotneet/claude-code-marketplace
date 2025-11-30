@@ -1,0 +1,8 @@
+{
+  "name": "code-review-toolkit",
+  "description": "Code review toolkit. Includes code review expert for various tech stacks and software development practices.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Shinji Yamada"
+  }
+}
