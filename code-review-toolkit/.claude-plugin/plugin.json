@@ -2,8 +2,8 @@
   "name": "code-review-toolkit",
   "description": "Code review toolkit. Includes code review expert for various tech stacks and software development practices.",
   "version": "1.0.0",
-  "homepage": "https://github.com/dotneet/claude-code-toolkit",
-  "repository": "https://github.com/dotneet/claude-code-toolkit",
+  "homepage": "https://github.com/dotneet/claude-code-marketplace",
+  "repository": "https://github.com/dotneet/claude-code-marketplace",
   "license": "MIT",
   "author": {
     "name": "Shinji Yamada"

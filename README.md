@@ -4,8 +4,13 @@ Code review toolkit for Claude Code. Includes code review expert for various tec
 
 ## Installation
 
+Follow the instructions below to install the toolkit in Claude Code.
+
 ```bash
-/plugin marketplace add dotneet/claude-code-toolkit
+# Register the marketplace
+/plugin marketplace add dotneet/claude-code-marketplace
+# Install the plugin
+/plugin install code-review-toolkit@dotneet-marketplace
 ```
 
 ## Skills
