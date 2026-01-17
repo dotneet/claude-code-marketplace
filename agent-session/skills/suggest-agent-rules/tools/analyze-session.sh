@@ -49,12 +49,10 @@ done
 
 # ファイルタイプを検出
 detect_file_type() {
-    local first_line
-    first_line=$(head -1 "$SESSION_FILE")
-
-    if echo "$first_line" | jq -e '.type == "user" or .type == "assistant"' > /dev/null 2>&1; then
+    # ファイル内にuserまたはassistantタイプのメッセージがあるか確認
+    if grep -q -m 1 -E '"type":"(user|assistant)"' "$SESSION_FILE" 2>/dev/null; then
         echo "claude"
-    elif echo "$first_line" | jq -e '.type == "session_meta"' > /dev/null 2>&1; then
+    elif head -1 "$SESSION_FILE" | jq -e '.type == "session_meta"' > /dev/null 2>&1; then
         echo "codex"
     else
         echo "unknown"
@@ -227,7 +225,6 @@ if [[ "$FILE_TYPE" == "claude" ]]; then
     fi
 elif [[ "$FILE_TYPE" == "codex" ]]; then
     echo "Codex session analysis - Summary only"
-    local meta
     meta=$(head -1 "$SESSION_FILE")
     echo "$meta" | jq '{
         id: .payload.id,

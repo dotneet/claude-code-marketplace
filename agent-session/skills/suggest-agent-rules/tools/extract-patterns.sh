@@ -45,11 +45,11 @@ collect_sessions() {
     local search_dir="$CLAUDE_DIR"
 
     if [[ -n "$PROJECT" ]]; then
-        local encoded_project
-        encoded_project=$(echo "$PROJECT" | sed 's|/|-|g')
+        local encoded_project="${PROJECT//\//-}"
         search_dir="$CLAUDE_DIR/*${encoded_project}*"
     fi
 
+    # shellcheck disable=SC2086 # Intentional glob expansion for search_dir
     find $search_dir -maxdepth 2 -name "*.jsonl" -type f 2>/dev/null | \
         grep -v '/subagents/' | \
         head -n "$LIMIT"
@@ -64,7 +64,7 @@ fi
 
 # 一時ファイル
 TMP_DIR=$(mktemp -d)
-trap "rm -rf $TMP_DIR" EXIT
+trap 'rm -rf "$TMP_DIR"' EXIT
 
 # 全セッションからツール使用を集計
 echo "Analyzing $(echo "$SESSIONS" | wc -l | tr -d ' ') sessions..."
@@ -94,7 +94,6 @@ for session in $SESSIONS; do
 
     # ユーザーの好み（特定キーワードを含む）
     grep '"type":"user"' "$session" 2>/dev/null | while read -r line; do
-        local content
         content=$(echo "$line" | jq -r '.message.content // ""' 2>/dev/null)
         if echo "$content" | grep -q -i -E '(必ず|常に|always|never|しない|prefer|好み|rule|ルール|規約|convention|don.t|do not)'; then
             echo "$content" | head -2

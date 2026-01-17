@@ -52,14 +52,6 @@ get_claude_sessions() {
         return
     fi
 
-    local pattern="*/*.jsonl"
-    if [[ -n "$PROJECT" ]]; then
-        # プロジェクトパスをエンコード（/を-に変換）
-        local encoded_project
-        encoded_project=$(echo "$PROJECT" | sed 's|/|-|g')
-        pattern="*${encoded_project}*/*.jsonl"
-    fi
-
     find "$CLAUDE_DIR" -maxdepth 2 -name "*.jsonl" -type f 2>/dev/null | while read -r file; do
         # サブエージェントファイルを除外
         if [[ "$file" == *"/subagents/"* ]]; then
@@ -73,9 +65,15 @@ get_claude_sessions() {
         local project_encoded
         project_encoded=$(basename "$dir")
 
-        # プロジェクトパスをデコード
+        # プロジェクトパスをデコード（-- は /. に、- は / に変換）
         local project_path
-        project_path=$(echo "$project_encoded" | sed 's|-|/|g')
+        project_path="${project_encoded//--//.}"
+        project_path="${project_path//-//}"
+
+        # プロジェクトフィルタリング
+        if [[ -n "$PROJECT" ]] && [[ "$project_path" != *"$PROJECT"* ]]; then
+            continue
+        fi
 
         # タイムスタンプを取得（最初のuserメッセージから）
         local timestamp
@@ -143,11 +141,9 @@ else
     while IFS='|' read -r timestamp agent project filename filepath; do
         if [[ -z "$timestamp" ]]; then continue; fi
         # タイムスタンプを短縮形式に変換
-        local short_ts
         short_ts=$(echo "$timestamp" | sed 's/T/ /' | cut -c1-19)
         # プロジェクトパスを短縮
-        local short_project
-        short_project=$(echo "$project" | sed "s|$HOME|~|")
+        short_project="${project/$HOME/~}"
         if [[ ${#short_project} -gt 40 ]]; then
             short_project="...${short_project: -37}"
         fi
