@@ -7,6 +7,15 @@
   },
   "plugins": [
     {
+      "name": "agent-session",
+      "source": "./agent-session",
+      "description": "analyze agent session history.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Shinji Yamada"
+      }
+    },
+    {
       "name": "review-tool",
       "source": "./review-tool",
       "description": "Code review toolkit. Includes code review expert for various tech stacks and software development practices.",

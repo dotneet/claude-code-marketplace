@@ -1,0 +1,11 @@
+{
+  "name": "agent-session",
+  "description": "analyze agent session history.",
+  "version": "1.0.0",
+  "homepage": "https://github.com/dotneet/claude-code-marketplace",
+  "repository": "https://github.com/dotneet/claude-code-marketplace",
+  "license": "MIT",
+  "author": {
+    "name": "Shinji Yamada"
+  }
+}
