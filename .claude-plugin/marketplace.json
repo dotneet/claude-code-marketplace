@@ -7,6 +7,15 @@
   },
   "plugins": [
     {
+      "name": "agent-call",
+      "source": "./agent-call",
+      "description": "call another agent such as cursor-agent, codex, claude to perform a task.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Shinji Yamada"
+      }
+    },
+    {
       "name": "agent-session",
       "source": "./agent-session",
       "description": "analyze agent session history.",
