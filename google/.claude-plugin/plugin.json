@@ -1,0 +1,11 @@
+{
+  "name": "google",
+  "description": "Google services integration including Calendar and Tasks API access.",
+  "version": "1.0.0",
+  "homepage": "https://github.com/dotneet/claude-code-marketplace",
+  "repository": "https://github.com/dotneet/claude-code-marketplace",
+  "license": "MIT",
+  "author": {
+    "name": "Shinji Yamada"
+  }
+}
