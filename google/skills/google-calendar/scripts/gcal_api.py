@@ -98,7 +98,7 @@ def add_common_auth_args(parser: argparse.ArgumentParser, default_scopes: Option
         "--token",
         default=os.environ.get(
             "GCAL_TOKEN_PATH",
-            os.path.expanduser("~/.config/google-calendar-direct/token.json"),
+            os.path.expanduser("~/.config/google-calendar/token.json"),
         ),
         help="Path to OAuth token JSON.",
     )
@@ -390,7 +390,7 @@ def cmd_clear_tasks(args: argparse.Namespace) -> Any:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="Google Calendar + Tasks API CLI (direct).")
+    parser = argparse.ArgumentParser(description="Google Calendar + Tasks API CLI.")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     call_parser = subparsers.add_parser("call", help="Call an arbitrary Calendar API endpoint")

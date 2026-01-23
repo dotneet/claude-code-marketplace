@@ -1,28 +1,28 @@
 ---
 name: google-calendar
-description: Direct Google Calendar + Tasks API access without MCP. Use when you need to read or modify calendars/events or tasklists/tasks using OAuth 2.0 and the bundled scripts.
+description: Google Calendar + Tasks API access without MCP. Use when you need to read or modify calendars/events or tasklists/tasks using OAuth 2.0 and the bundled scripts.
 ---
 
-# Google Calendar + Tasks Direct Access
+# Google Calendar + Tasks Access
 
 ## Quick start
 
-- Create a Google Cloud OAuth client (Desktop app) and download the credentials JSON.
+- Create a Google Cloud OAuth client (Desktop app) and save the credentials JSON to `~/.config/google-calendar/credentials.json`.
 - Install dependencies: `python3 -m pip install -r <skill_dir>/scripts/requirements.txt`.
 - Authenticate and store a token:
   - Calendar only:
-    - `python3 <skill_dir>/scripts/gcal_auth.py --credentials /path/to/client_secret.json`
+    - `python3 <skill_dir>/scripts/gcal_auth.py`
   - Tasks only:
-    - `python3 <skill_dir>/scripts/gcal_auth.py --credentials /path/to/client_secret.json --scopes https://www.googleapis.com/auth/tasks`
+    - `python3 <skill_dir>/scripts/gcal_auth.py --scopes https://www.googleapis.com/auth/tasks`
   - Calendar + Tasks (single token):
-    - `python3 <skill_dir>/scripts/gcal_auth.py --credentials /path/to/client_secret.json --scopes https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/tasks`
+    - `python3 <skill_dir>/scripts/gcal_auth.py --scopes https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/tasks`
 - Call the API:
   - `python3 <skill_dir>/scripts/gcal_api.py list-calendars`
 
 ## Credentials and tokens
 
-- Provide credentials via `--credentials` or `GCAL_CREDENTIALS`.
-- Tokens are stored at `~/.config/google-calendar-direct/token.json` by default.
+- Credentials are expected at `~/.config/google-calendar/credentials.json` by default.
+- Tokens are stored at `~/.config/google-calendar/token.json` by default.
 - Use `--token` or `GCAL_TOKEN_PATH` to switch accounts or isolate environments.
 
 ## Date/time rules

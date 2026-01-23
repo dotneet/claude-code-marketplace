@@ -16,14 +16,17 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--credentials",
         help="Path to OAuth client credentials JSON (Desktop app).",
-        default=os.environ.get("GCAL_CREDENTIALS"),
+        default=os.environ.get(
+            "GCAL_CREDENTIALS",
+            os.path.expanduser("~/.config/google-calendar/credentials.json"),
+        ),
     )
     parser.add_argument(
         "--token",
         help="Path to store OAuth token JSON.",
         default=os.environ.get(
             "GCAL_TOKEN_PATH",
-            os.path.expanduser("~/.config/google-calendar-direct/token.json"),
+            os.path.expanduser("~/.config/google-calendar/token.json"),
         ),
     )
     parser.add_argument(
@@ -53,10 +56,6 @@ def ensure_parent(path: str) -> None:
 
 def main() -> int:
     args = parse_args()
-
-    if not args.credentials:
-        print("Missing --credentials or GCAL_CREDENTIALS.", file=sys.stderr)
-        return 2
 
     credentials_path = pathlib.Path(args.credentials).expanduser().resolve()
     if not credentials_path.exists():

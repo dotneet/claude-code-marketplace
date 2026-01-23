@@ -1,6 +1,6 @@
-# Google Calendar + Tasks Direct CLI
+# Google Calendar + Tasks CLI
 
-This skill provides a lightweight Python CLI for direct Google Calendar and Google Tasks API access using OAuth 2.0.
+This skill provides a lightweight Python CLI for Google Calendar and Google Tasks API access using OAuth 2.0.
 It is useful for listing/creating/updating events and tasks without using the MCP server.
 
 ## Requirements
@@ -22,7 +22,7 @@ python3 -m pip install -r .codex/skills/google-calendar/scripts/requirements.txt
 3. Configure the OAuth consent screen (External or Internal).
 4. Create credentials:
    - **Create Credentials** → **OAuth client ID** → **Desktop app**
-5. Download the JSON file (client secret).
+5. Download the JSON file (client secret) and save it to `~/.config/google-calendar/credentials.json`.
 
 Keep this file out of git and in a secure location.
 
@@ -33,15 +33,13 @@ Authenticate and store a token:
 - Calendar only:
 
 ```bash
-python3 .codex/skills/google-calendar/scripts/gcal_auth.py \
-  --credentials /path/to/client_secret.json
+python3 .codex/skills/google-calendar/scripts/gcal_auth.py
 ```
 
 - Tasks only:
 
 ```bash
 python3 .codex/skills/google-calendar/scripts/gcal_auth.py \
-  --credentials /path/to/client_secret.json \
   --scopes https://www.googleapis.com/auth/tasks
 ```
 
@@ -49,14 +47,13 @@ python3 .codex/skills/google-calendar/scripts/gcal_auth.py \
 
 ```bash
 python3 .codex/skills/google-calendar/scripts/gcal_auth.py \
-  --credentials /path/to/client_secret.json \
   --scopes https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/tasks
 ```
 
 By default, the token is stored at:
 
 ```
-~/.config/google-calendar-direct/token.json
+~/.config/google-calendar/token.json
 ```
 
 You can override the token path with either:
@@ -72,7 +69,7 @@ You can override the token path with either:
 
 ## Environment variables
 
-- `GCAL_CREDENTIALS`: default path to the client secret JSON.
+- `GCAL_CREDENTIALS`: path to the client secret JSON (default: `~/.config/google-calendar/credentials.json`).
 - `GCAL_TOKEN_PATH`: default path for the OAuth token JSON.
 
 ## Common commands
