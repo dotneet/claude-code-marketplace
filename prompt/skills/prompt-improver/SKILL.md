@@ -12,6 +12,8 @@ A skill that analyzes and improves prompts based on general LLM/agent best pract
 If you are running in Claude Code, also read `references/claude.md` and apply the additional Claude-specific techniques.
 If you are running in Codex CLI, also read `references/codex.md` and apply the additional Codex-specific techniques.
 
+When the input is a document that instructs an agent (e.g., plan files, AGENTS.md, system instruction docs), treat the document as the improvement target; identify issues and propose concrete improvements, and include a revised draft when helpful.
+
 ## Workflow
 
 ### Step 0: Classify Task and Complexity
@@ -21,6 +23,7 @@ Classify the task and decide whether an explicit exploration/planning phase shou
 - Task type: bugfix, feature, refactor, research, UI/visual, docs, ops
 - Complexity: single-file/small change vs multi-file/uncertain impact
 - Risk: data safety, security, compatibility, performance
+- Input type: prompt vs agent-instruction document (plan files, AGENTS.md, system instruction docs)
 
 If the task is complex or ambiguous, the improved prompt should explicitly request an exploration/planning phase before implementation.
 
@@ -167,6 +170,13 @@ The following questions should be answered to make the prompt more effective:
 
 ### Improved Prompt
 [The improved prompt]
+
+### Document Improvement Suggestions (if applicable)
+- [Issue and concrete improvement for the instruction document]
+- [Issue and concrete improvement for the instruction document]
+
+### Revised Document (optional)
+[A revised draft of the instruction document when helpful]
 
 ### Improved Prompt Template (optional)
 Use this as a fill-in template if the user wants a reusable prompt format:
